@@ -24,7 +24,7 @@ func vaccinationPersons(c *gin.Context) {
 func getvaccinationPersons() []Persons {
 	Data := []Persons{}
 
-	SQL := "SELECT persons.email from persons, vaccinations WHERE persons.email=vaccinations.recipient"
+	SQL := "SELECT persons.email,persons.first_name,persons.last_name,persons.date_of_birth,persons.sex from persons, vaccinations WHERE persons.email=vaccinations.recipient"
 
 	rows, err := DB.Query(SQL)
 
@@ -36,7 +36,7 @@ func getvaccinationPersons() []Persons {
 	person := Persons{}
 
 	for rows.Next() {
-		rows.Scan(&person.Email)
+		rows.Scan(&person.Email, &person.FirstName, &person.LastName, &person.DateOfBirth, &person.Sex)
 
 		Data = append(Data, person)
 
