@@ -7,7 +7,12 @@ import (
 )
 
 type Nurse struct {
-	Email string `json:"email"`
+	Email       string `json:"email" binding:"required"`
+	FirstName   string `json:"first_name" binding:"required"`
+	LastName    string `json:"last_name" binding:"required"`
+	DateOfBirth string `json:"date_of_birth" binding:"required"`
+	Sex         string `json:"sex" binding:"required"`
+	City        string `json:"city" binding:"required"`
 }
 
 type Persons struct {
@@ -32,5 +37,7 @@ func setupRoutes(r *gin.Engine) {
 	r.GET("all_persons", allPersons)
 	r.GET("vaccination_nurses", vaccinationNurses)
 	r.GET("vaccination_person", vaccinationPersons)
+
+	r.POST("nurse/add", addNurseHandler)
 
 }
