@@ -23,6 +23,10 @@ type Persons struct {
 	Sex         string `json:"sex"`
 }
 
+type RemoveNurse struct {
+	Email string `json:"email" binding:"required"`
+}
+
 func main() {
 	CreateDBConnection()
 	fmt.Println("test")
@@ -39,5 +43,6 @@ func setupRoutes(r *gin.Engine) {
 	r.GET("vaccination_person", vaccinationPersons)
 
 	r.POST("nurse/add", addNurseHandler)
+	r.DELETE("nurse/delete", deleteNurseHandler)
 
 }
